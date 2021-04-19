@@ -19,7 +19,6 @@ class UserTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("Chegou!")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,10 +39,7 @@ class UserTableViewController: UITableViewController {
                 }
             }
             task.resume()
-            
         }
-        
-        
     }
     
     
@@ -59,11 +55,6 @@ class UserTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "defaultCell", for: indexPath) as! UserTableViewCell
         
         cell.user = user
-        
-        //Não faça assim!
-//        if let nomeLabel = cell.viewWithTag(10) as? UILabel {
-//            nomeLabel.text = "Nome \(index)"
-//        }
         
         return cell
         
@@ -83,21 +74,11 @@ class UserTableViewController: UITableViewController {
             print("Sender: \(sender ?? "não veio!")")
             
             if let userCell = sender as? UserTableViewCell, let user = userCell.user {
-                
                 segue.destination.title = user.name
-                
+                guard let destination = segue.destination as? PostTableViewController else {return}
+                destination.userId = user.id
             }
         }
     }
     
 }
-
-//Padrão de projeto Business Delegate
-
-//extension UserTableViewController: UITableViewDataSource {
-//
-//}
-//
-//extension UserTableViewController: UITableViewDelegate {
-//
-//}
